@@ -1,6 +1,21 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+## PID controller - effects of P, I and D components
+
+**P** component is the most important, as it directly affects the behavior based on error value. In this case, the biggest P parameter, the harder the car is turning to the center position when outside.
+
+**I** component is a bias adjusting parameter. It is used, when some general bias is assumed to affect the motion of the car. In this case, we may assume that the bias is very little - or none at all.
+
+**D** component is supposed to smooth the line of P component - it means it reduces the overshooting and oscilating of P component.
+
+In case of this project, it is easily visible when one of the components is overrated. When P is set too big, the car is turning aggresively - in real life causing passenger to have dizziness :) Too much of I component causes car to behave completely unexpectedly - it tends to correct itself to one way, loosing the path in very first seconds of the road. Behavior of a controller with overrated D component might be a surprise - though it is supposed to protect the car from oscillating, it causes exactly that when too much - it means it tries so hard not to overshoot, that it's spinning around the center, causing a lot of small radius oscillations.
+
+In addition to PID controller for a steering behavior, I also implelemented this controller for a throttle value. As it can be seen in the code, it is dependent on CTE value and its speed compared to the angle - so the car will slow down when the error is big, but also when it drives fast and it goes into a curve - safety reasons :)
+
+The final choice of parameters is purely experimental and manual. I tried to choose completely different values to finally end up with those provided in main.cpp file (lines 36-45). During the process I was able to see the dependencies of the values that I described above.
+
+
 ---
 
 ## Dependencies
